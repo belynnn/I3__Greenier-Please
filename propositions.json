@@ -1,0 +1,56 @@
+{
+    "operators": [
+        "Alexandra - game dev",
+        "Anissa - admin sys/network",
+        "Audrey - UI/UX designer",
+        "Bastien - Team Panoptes",
+        "Benedicte - frontend dev",
+        "Debby - backend dev",
+        "Gweny - game dev",
+        "Inès - admin sys/network",
+        "Joel - trainer at Interface3",
+        "Julie - trainer at Interface3",
+        "Luna - game dev",
+        "Nicole - chief department at Interface3",
+        "Samuel - trainer at Cognitic",
+        "Sonia - chief department at Interface3",
+        "Sounia - frontend dev",
+        "Thomas - Team Panoptes"
+    ],
+
+    "projets": [
+        {
+            "title": "Added functionality: impose geolocation",
+            "proposal": [
+                "Collecting information without warning is not that important",
+                "Declare in an info message that if the user wants to register, they have to accept geolocation",
+                "Forcing the activation of geolocation on mobile phones without saying anything"
+            ],
+            "goodProposal": 1,
+            "information": "Are users informed of how their confidential information will be used? Is the information on the use of the data collected made accessible and easy to consult, and has the DPO been consulted? Are the checkboxes on the forms not pre-filled?\nThe data that users entrust to us is the responsibility of the company, and users must be kept informed of the care that the company takes to ensure the confidentiality of their data.\nThe RGPD imposes a framework for personal data, but does not cover other categories of data that deserve the same attention and precautions.",
+            "link": "https://gr491.isit-europe.org/crit.php?id=9-3068-uxui-les-donnees-que-les-utilisateurs-confient-sont"
+        },
+        {
+            "title": "Reducing the impact of accommodation",
+            "proposal": [
+                "Use old machines lying around in the cellar",
+                "Install 3 small wind turbines behind the building",
+                "Invest in a contract to have the electricity consumption of each substation checked with a view to having them replaced"
+            ],
+            "goodProposal": 2,
+            "information": "Is the PUE less than or equal to 1.2?\nThe total power consumed by the data center compared to the power consumed by the servers gives the overall efficiency of the entire infrastructure.\nThe hosting technical file tracks the energy efficiency and PUE of the sites.",
+            "link": "https://gr491.isit-europe.org/crit.php?id=1-8014-hebergement-la-puissance-totale-consommee-par-le-datacenter"
+        },
+        {
+            "title": "Promoting low-impact behaviour",
+            "proposal": [
+                "Train the frontend team in GreenIT",
+                "Test the weight of each image using a tool that allows you to evaluate the volume of images.",
+                "Use ChatGPT"
+            ],
+            "goodProposal": 1,
+            "information": "Is a maximum volume of components transferred to the user device defined?\nAll the components transferred to the user device have an impact on network transfers and on the processing required to handle them on the user terminal. It is important to reduce and control this volume.\nA good solution is to use a Project Framework Sheet.",
+            "link": "https://gr491.isit-europe.org/crit.php?id=10-5085-frontend-lensemble-des-elements-transferes-sur-le-poste"
+        }
+    ]
+}
