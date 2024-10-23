@@ -1,10 +1,12 @@
-const Index = () => {
+import Navbar from '../../Components/Navbar/Navbar';
 
-    return (
-        <>
-            <h1>Greenier, Please</h1>
-        </>
-    );
+const Index = () => {
+  return (
+    <>
+      <h1>Greenier, Please</h1>
+      <Navbar />
+    </>
+  );
 };
 
 export default Index;
