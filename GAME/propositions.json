@@ -20,6 +20,7 @@
 
     "projets": [
         {
+            
             "title": "Added functionality: impose geolocation",
             "proposal": [
                 "Collecting information without warning is not that important",
@@ -31,6 +32,7 @@
             "link": "https://gr491.isit-europe.org/crit.php?id=9-3068-uxui-les-donnees-que-les-utilisateurs-confient-sont"
         },
         {
+            
             "title": "Reducing the impact of accommodation",
             "proposal": [
                 "Use old machines lying around in the cellar",

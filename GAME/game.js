@@ -16,30 +16,95 @@ const config = {
     }
 };
 
+let currentIndex = 0;
+
 const game = new Phaser.Game(config);
 
-function preload() {
-    this.load.image('background', './I3__Greenier-Please/assets/BG.png');
-    this.load.json('gameData', 'hackathon/I3__Greenier-Please/GAME/propositions.json');
 
+function preload() {
+    this.load.image('background', './assets/BG.png');
+    this.load.image('buttonaccept', './assets/acceptbutton.png');
+    this.load.json('gameData', './GAME/propositions.json');
+    this.load.image('paper','./assets/Paper.png' );
+    this.load.image('closeup','./assets/PaperCloseUp.png' );
+    
 }
 
-function create() {
-    const data = this.cache.json.get('gameData');
+let data;
+let paper1;
+let paper2;
+let paper3;
 
-    let background = this.add.image(0, 0, 'background');
-    background.setOrigin(0, 0);
-    //background.setScale(0.5);
 
-    console.log(data.operators[0]);
-    console.log(data.projets[0].title);
 
-    data = this.cache.json.get('gameData');
-
+function nextproposal()
+{
+    console.log("entered")
+    currentIndex += 1;
     afficherProjetEtOperateur();
 }
 
+function create() {
 
+    data = this.cache.json.get('gameData');
+
+    let background = this.add.image(0, 0, 'background');
+    background.setOrigin(0, 0);
+
+    afficherProjetEtOperateur()
+
+    //buttons
+    const accept = this.add.image(788, 500, 'buttonaccept');
+    accept.setInteractive();
+    accept.setOrigin(0, 0);
+    accept.on('pointerdown', () => nextproposal())
+
+    let paper1 = this.add.image(150, 450, 'paper');
+    paper1.setInteractive();
+    paper1.setOrigin(0, 0);
+    paper1.setInteractive();
+    paper1.on('pointerup', () => propal1())
+    paper1.on('pointerdown', () => closeup.setVisible(true))
+    
+    
+    let paper2 = this.add.image(300, 450, 'paper');
+    paper2.setInteractive();
+    paper2.setOrigin(0, 0);
+    paper2.setInteractive();
+    paper2.on('pointerup', () => propal2())
+    paper2.on('pointerdown', () => closeup.setVisible(true))
+
+    let paper3 = this.add.image(450, 450, 'paper');
+    paper3.setInteractive();
+    paper3.setOrigin(0, 0);
+    paper3.setInteractive();
+    paper3.on('pointerup', () => propal3())
+    paper3.on('pointerdown', () => closeup.setVisible(true))
+
+    let closeup = this.add.image(250, 50, 'closeup');
+    closeup.setOrigin(0,0);
+    closeup.setVisible(false);
+
+    
+}
+
+function propal1()
+{
+    data.projets[currentIndex].proposal[0];
+    console.log(data.projets[currentIndex].proposal[0]);
+}
+
+function propal2()
+{
+    data.projets[currentIndex].proposal[1];
+    console.log(data.projets[currentIndex].proposal[1]);
+}
+
+function propal3()
+{
+    data.projets[currentIndex].proposal[2];
+    console.log(data.projets[currentIndex].proposal[2]);
+}
 
 
 function update() {
@@ -47,29 +112,17 @@ function update() {
 }
 
 function afficherProjetEtOperateur() {
+
     // Vérifie si nous avons encore des projets à afficher
     if (currentIndex < data.projets.length) {
-        // Sélectionner l'opérateur et le projet actuels
+         //Sélectionner l'opérateur et le projet actuels
         let currentOperateur = data.operators[currentIndex];
         let currentProjet = data.projets[currentIndex];
 
         console.log("Opérateur: " + currentOperateur);
         console.log("Projet: " + currentProjet.title);
 
-        // Afficher le titre du projet dans le jeu
-        this.add.text(100, 100, currentProjet.title, { fontSize: '24px', fill: '#fff' });
-
-        // Boucle sur chaque proposition et créer un bouton
-        for (let i = 0; i < currentProjet.proposal.length; i++) {
-            let proposition = currentProjet.proposal[i];
-
-            // Créer et positionner le bouton
-            let button = this.add.text(100, 150 + i * 50, proposition, { fontSize: '20px', fill: '#fff', backgroundColor: '#000' })
-                .setInteractive()  // Rendre le texte interactif (cliquable)
-                .on('pointerdown', () => verifierReponse(i))  // Appeler la fonction verifierReponse quand on clique
-                .on('pointerover', () => button.setStyle({ fill: '#f39c12' }))  // Changer de couleur quand la souris passe dessus
-                .on('pointerout', () => button.setStyle({ fill: '#fff' }));     // Revenir à la couleur blanche quand la souris part
-        }
+       
     } else {
         // Si tous les projets ont été traités
         console.log("Tous les projets ont été traités.");
@@ -91,6 +144,8 @@ function verifierReponse(index) {
     // Passer au projet suivant
     currentIndex++;
     afficherProjetEtOperateur();
+
+   
 }
 
 
