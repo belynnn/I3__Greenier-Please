@@ -1,0 +1,28 @@
+.subtitle {
+    font-size: 40px;
+    padding-bottom: 1rem;
+}
+
+.subjectname {
+    width: 10%;
+    border: 3px solid rebeccapurple;
+    left: 0%;
+    font-size: 30px;
+}
+
+.firstsection {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: auto;
+    margin-top: 1.5rem;
+    border: 3px solid darkblue;
+    height: auto;
+
+    .membercards {
+        padding: 1rem;
+        width: 30%;
+        border: 3px solid green;
+    }
+}

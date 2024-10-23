@@ -1,11 +1,21 @@
 #root {
   max-width: 1280px;
+  height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   text-align: center;
 }
 
+:root {
+  --background: #FAFAD8;
+  --text-color: #17372A;
+  --div-border: #FCFFFD;
+}
+
 * {
-  background-color: antiquewhite;
-  color: black;
+  background-color: var(--background);
+  color: #17372A;
+  margin: 0;
+  padding: 0;
+
 }

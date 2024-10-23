@@ -1,0 +1,31 @@
+.firstsection {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .title {
+        padding-bottom: 1rem;
+        font-size: 40px;
+    }
+
+    .explanation {
+        width: 70%;
+        padding-bottom: 1rem;
+        font-size: 20px;
+    }
+}
+
+
+.btnplay {
+    margin-top: 30px;
+    position: relative;
+    border: none;
+
+    img {
+        object-fit: fill;
+        width: 200px;
+        height: 45px;
+    }
+}
