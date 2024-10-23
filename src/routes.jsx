@@ -1,7 +1,7 @@
-import About from "./Components/About/About";
-import Game from "./Components/Game/Game";
-import Index from "./Components/Index/Index";
-import NotFoundPage from "./Components/NotFoundPage/NotFoundPage";
+import About from "./Containers/About/About";
+import Game from "./Containers/Game/Game";
+import Index from "./Containers/Index/Index";
+import NotFoundPage from "./Containers/NotFoundPage/NotFoundPage";
 import App from "./App";
 
 const routes = [
