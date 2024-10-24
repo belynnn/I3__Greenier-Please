@@ -27,10 +27,12 @@ let index;
 let thermometer;
 let ingamewindow;
 let projectTitleText, operatorText;  
+let countDownText, STARTCOUNTDOWN = 20, countDown, countDownTimer;
+let npc;
 
 let clickCount = localStorage.setItem('clickCount', 0);
  
-let game ;
+let game;
 
 function startgame()
 {
@@ -53,7 +55,8 @@ function preload() {
     this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
     this.load.image('neutralwindow', './assets/NeutralWindow.png');
     this.load.image('elli', './assets/PNG.png');
-    //this.load.image('elli', './assets/PNG.png');
+    this.load.image('thomas', './assets/NPC2.png');
+    this.load.image('jelly', './assets/jelly.png');
 
     clickCount = 0;
 }
@@ -61,15 +64,28 @@ function preload() {
 function create() {
 
     data = this.cache.json.get('gameData');
- 
 
     let background = this.add.image(0, 0, 'background');
     background.setOrigin(0, 0);
 
     thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
     ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97);
-    npc = this.add.image(100, 125, 'elli').setOrigin(0, 0).setScale(0.8)
+    
+    if(currentIndex == 0)
+        {
+            npc = this.add.image(50, 125, 'elli').setOrigin(0, 0).setScale(0.8)
+        }
 
+    if(currentIndex == 1)
+        {
+            npc = this.add.image(50, 125, 'thomas').setOrigin(0, 0).setScale(0.8)
+        }
+    if(currentIndex == 2)
+        {
+            npc = this.add.image(50, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+        }
+    
+    
     closeup = this.add.image(250, -150, 'closeup').setOrigin(0, 0).setVisible(false);
     closeupText = this.add.text(300, 200, '', { 
         fontSize: '18px', 
@@ -79,10 +95,10 @@ function create() {
         wordWrap: { width: closeup.width - 50 }
     }).setOrigin(0, 0).setVisible(false);
  
+    
 
     winscreen = this.add.image(100, 100, 'winscreen').setOrigin(0, 0).setInteractive().setVisible(false);
     lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setInteractive().setVisible(false);
- 
 
     accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
     accept.on('pointerdown', () => {makeclosup = false;clickCount++;});
@@ -95,10 +111,36 @@ function create() {
     operatorText = this.add.text(20, 20, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });
     projectTitleText = this.add.text(20, 50, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' })
 
+    countDown = STARTCOUNTDOWN; 
+    countDownText = this.add.text(20, 80, countDown + " sec", { fontFamily: 'Courier New', fontSize: '20px', fontStyle: 'bold', fill: '#ff0000' });
+    
+    countDownTimer = this.time.addEvent({
+        delay: 1000,
+        callback: countingDown,
+        callbackScope: this,
+        loop: true
+    });
     afficherProjetEtOperateur.call(this);
 }
  
 function update() {
+
+    npc.setVisible(false);
+
+    if(currentIndex == 0)
+        {
+            npc = this.add.image(50, 125, 'elli').setOrigin(0, 0).setScale(0.8)
+        }
+
+    if(currentIndex == 1)
+        {
+            npc = this.add.image(50, 125, 'thomas').setOrigin(0, 0).setScale(0.8)
+        }
+    if(currentIndex == 2)
+        {
+            npc = this.add.image(50, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+        }
+    
 
     closeup.setVisible(makeclosup);
     closeupText.setVisible(makeclosup);
@@ -110,6 +152,8 @@ function update() {
         paper1.setVisible(false);
         paper2.setVisible(false);
         paper3.setVisible(false);
+
+        countDownTimer.paused = true;
     }
 
     thermometer.setVisible(false)
@@ -127,6 +171,9 @@ function update() {
         thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
 
     }
+
+    
+
 }
  
 function createPaper(scene, x, y, propalIndex) {
@@ -154,6 +201,9 @@ function afficherProjetEtOperateur() {
 
         operatorText.setText('Opérateur:\n' + currentOperateur);
         projectTitleText.setText('Projet:\n' + currentProjet.title);
+
+        countDown = STARTCOUNTDOWN;  
+        countDownText.setText(countDown + " sec");
  
     } else {
 
@@ -167,6 +217,8 @@ function afficherProjetEtOperateur() {
             console.log("perdu");
             didyouwin = false;
         }
+
+        countDownTimer.paused = true;
     }
 }
  
@@ -193,20 +245,25 @@ function nextproposal() {
     currentIndex += 1;
     afficherProjetEtOperateur.call(this);
 
-    if(currentIndex == 1)
-        {
-            npc = this.add.image(225, 125, 'elli').setOrigin(0, 0).setScale(0.8)
-        }
+    
     
 }
 
-function killgame()
+function countingDown() {
+    countDown -= 1;
+    countDownText.setText(countDown + " sec");
+    if (countDown == 0) {
+        nextproposal();
+    }
+}
+
+//function killgame()
 {
-    if (game)
+    //if (game)
         {
-            game.destroy();
-            game = null;
-            document.querySelector('canvas[width][height]').remove();
+            //game.destroy();
+            //game = null;
+            //document.querySelector('canvas[width][height]').remove();
         }
    
 }
