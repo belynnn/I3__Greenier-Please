@@ -1,28 +1,49 @@
 .subtitle {
-    font-size: 40px;
+    font-size: 35px;
     padding-bottom: 1rem;
 }
 
 .subjectname {
     width: 10%;
-    border: 3px solid rebeccapurple;
     left: 0%;
-    font-size: 30px;
+    font-size: 40px;
 }
 
 .firstsection {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
+    gap: 30px;
     justify-content: space-around;
     margin: auto;
     margin-top: 1.5rem;
-    border: 3px solid darkblue;
-    height: auto;
+    height: 100%;
 
     .membercards {
-        padding: 1rem;
-        width: 30%;
-        border: 3px solid green;
+        padding: 10px;
+        width: 20%;
+        background-color: var(--text-color);
+        /* height: 40%; */
+
+
+        h3,
+        p {
+            border-radius: 20%;
+            background-color: var(--text-color);
+            color: var(--background);
+        }
+
+        .socialnetwork {
+            background-color: var(--text-color);
+
+            img {
+                background-color: var(--text-color);
+            }
+
+            a {
+                background-color: var(--text-color);
+            }
+        }
     }
+
 }

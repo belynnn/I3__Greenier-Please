@@ -6,10 +6,29 @@
   text-align: center;
 }
 
+::-webkit-scrollbar-track {
+  border: 5px solid #FAFAD8;
+  /* // border color does not support transparent on scrollbar */
+  /* // border-color: transparent; */
+  background-color: #b2bec3;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: #FAFAD8;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #17372A;
+  border-radius: 10px;
+}
+
 :root {
   --background: #FAFAD8;
   --text-color: #17372A;
   --div-border: #FCFFFD;
+  --text-font: "Courier New", Courier, Monospace;
+  --title-font: "";
 }
 
 * {
@@ -17,5 +36,6 @@
   color: #17372A;
   margin: 0;
   padding: 0;
+  font-family: var(--text-font);
 
 }
