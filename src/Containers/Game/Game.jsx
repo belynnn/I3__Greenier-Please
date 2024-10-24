@@ -4,18 +4,6 @@ import styles from './Game.module.css';
 import { useLocation } from 'react-router-dom';
 
 const Game = () => {
-  // const location = useLocation();
-  // const [display, setDisplay] = useState(false);
-  // const handleLocation = () => {
-
-  //   if (location.pathname == "/game") {
-  //     () => (
-  //       setDisplay = !display
-
-  //     );
-
-  //   }
-  // };
 
   useEffect(() => {
     const script = document.createElement("script");
