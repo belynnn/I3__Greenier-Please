@@ -1,4 +1,11 @@
-.divinfocontainer {
-    display: flex;
-    flex-direction: column;
+.infodiv {
+    border: 2px solid blue;
+    min-width: 300px;
+    border-radius: 1em;
+}
+.infotitle {
+    padding: 2em;
+    border-radius: 1em;
+    background-color: var(--text-color);
+    color: var(--div-border);
 }
