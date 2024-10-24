@@ -27,12 +27,16 @@ let index;
 let index;
 let thermometer;
 let ingamewindow;
+let projectTitleText, operatorText;
 
 let clickCount = localStorage.setItem('clickCount', 0);
 
 let game;
+
 function startgame() {
-    if (!game) game = new Phaser.Game(config);
+    if (!game) {
+        game = new Phaser.Game(config);
+    }
 }
 
 function preload() {
@@ -47,6 +51,8 @@ function preload() {
     this.load.image('seccondthermomether', './assets/SecondThermometer.png');
     this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
     this.load.image('neutralwindow', './assets/NeutralWindow.png');
+    this.load.image('elli', './assets/PNG.png');
+    //this.load.image('elli', './assets/PNG.png');
 
     clickCount = 0;
 }
@@ -57,12 +63,15 @@ function create() {
     let background = this.add.image(0, 0, 'background');
     background.setOrigin(0, 0);
 
+    thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
+    ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97);
+    npc = this.add.image(100, 125, 'elli').setOrigin(0, 0).setScale(0.8);
 
     closeup = this.add.image(250, -150, 'closeup').setOrigin(0, 0).setVisible(false);
     closeupText = this.add.text(300, 200, '', {
         fontSize: '18px',
         fill: '#2E8B57',
-        fontFamily: 'Arial',
+        fontFamily: 'courier new',
         fontStyle: 'bold',
         wordWrap: { width: closeup.width - 50 }
     }).setOrigin(0, 0).setVisible(false);
@@ -86,6 +95,9 @@ function create() {
     paper1 = createPaper(this, 150, 450, 0);
     paper2 = createPaper(this, 300, 450, 1);
     paper3 = createPaper(this, 450, 450, 2);
+
+    operatorText = this.add.text(20, 20, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });
+    projectTitleText = this.add.text(20, 50, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });
 
     afficherProjetEtOperateur.call(this);
 }
@@ -144,8 +156,12 @@ function afficherProjetEtOperateur() {
         let currentOperateur = data.operators[currentIndex];
         let currentProjet = data.projets[currentIndex];
 
-        console.log('Opérateur: ' + currentOperateur);
-        console.log('Projet: ' + currentProjet.title);
+        console.log("Opérateur: " + currentOperateur);
+        console.log("Projet: " + currentProjet.title);
+
+        operatorText.setText('Opérateur:\n' + currentOperateur);
+        projectTitleText.setText('Projet:\n' + currentProjet.title);
+
     } else {
         // Si tous les projets ont été traités
         console.log('Tous les projets ont été traités.');
@@ -162,9 +178,17 @@ function verifierReponse(index) {
         console.log('Mauvaise réponse, essayez encore !');
     }
 
-    // Passer au projet suivant
-    currentIndex++;
-    afficherProjetEtOperateur();
+    nextproposal();
+}
+
+function nextproposal() {
+    currentIndex += 1;
+    afficherProjetEtOperateur.call(this);
+
+    if (currentIndex == 1) {
+        npc = this.add.image(225, 125, 'elli').setOrigin(0, 0).setScale(0.8);
+    }
+
 }
 
 function killgame() {
@@ -173,4 +197,5 @@ function killgame() {
         game = null;
         document.querySelector('canvas[width][height]').remove();
     }
+
 }
