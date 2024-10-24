@@ -30,7 +30,15 @@ let projectTitleText, operatorText;
 
 let clickCount = localStorage.setItem('clickCount', 0);
  
-let game = new Phaser.Game(config);
+let game ;
+
+function startgame()
+{
+    if (!game)
+        {
+            game = new Phaser.Game(config);
+        }
+}
  
 function preload() {
     this.load.image('background', './assets/BG.png');
@@ -45,6 +53,7 @@ function preload() {
     this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
     this.load.image('neutralwindow', './assets/NeutralWindow.png');
     this.load.image('elli', './assets/PNG.png');
+    //this.load.image('elli', './assets/PNG.png');
 
     clickCount = 0;
 }
@@ -193,7 +202,11 @@ function nextproposal() {
 
 function killgame()
 {
-    game.destroy();
-    game = null;
-    document.querySelector('canvas[width][height]').remove();
+    if (game)
+        {
+            game.destroy();
+            game = null;
+            document.querySelector('canvas[width][height]').remove();
+        }
+   
 }
