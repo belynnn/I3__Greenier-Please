@@ -24,7 +24,6 @@ let makeclosup = false;
 let didyouwin;
 let winscreen, lostscreen;
 let index;
-let index;
 let thermometer;
 let ingamewindow;
 let projectTitleText, operatorText;
