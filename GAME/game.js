@@ -6,14 +6,14 @@ const config = {
         default: 'arcade',
         arcade: {
             gravity: { y: 0 },
-            debug: false
-        }
+            debug: false,
+        },
     },
     scene: {
         preload: preload,
         create: create,
-        update: update
-    }
+        update: update,
+    },
 };
 
 let currentIndex = 0;
@@ -23,6 +23,7 @@ let compteur = 0;
 let makeclosup = false;
 let didyouwin;
 let winscreen, lostscreen;
+let index;
 let index;
 let thermometer;
 let ingamewindow;
@@ -51,9 +52,7 @@ function preload() {
 }
 
 function create() {
-
     data = this.cache.json.get('gameData');
-
 
     let background = this.add.image(0, 0, 'background');
     background.setOrigin(0, 0);
@@ -68,9 +67,16 @@ function create() {
         wordWrap: { width: closeup.width - 50 }
     }).setOrigin(0, 0).setVisible(false);
 
-
-    winscreen = this.add.image(100, 100, 'winscreen').setOrigin(0, 0).setInteractive().setVisible(false);
-    lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setInteractive().setVisible(false);
+    winscreen = this.add
+        .image(100, 100, 'winscreen')
+        .setOrigin(0, 0)
+        .setInteractive()
+        .setVisible(false);
+    lostscreen = this.add
+        .image(100, 100, 'lostscreen')
+        .setOrigin(0, 0)
+        .setInteractive()
+        .setVisible(false);
 
 
     accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
@@ -85,7 +91,6 @@ function create() {
 }
 
 function update() {
-
     closeup.setVisible(makeclosup);
     closeupText.setVisible(makeclosup);
 
@@ -116,9 +121,13 @@ function update() {
 }
 
 function createPaper(scene, x, y, propalIndex) {
-    let paper = scene.add.image(x, y, 'paper').setInteractive().setOrigin(0, 0).setVisible(true);
+    let paper = scene.add
+        .image(x, y, 'paper')
+        .setInteractive()
+        .setOrigin(0, 0)
+        .setVisible(true);
     paper.on('pointerdown', () => selectProposal(propalIndex));
-    paper.on('pointerup', () => makeclosup = true);
+    paper.on('pointerup', () => (makeclosup = true));
     return paper;
 }
 
@@ -131,50 +140,31 @@ function selectProposal(propalIndex) {
 function afficherProjetEtOperateur() {
     // Vérifie si nous avons encore des projets à afficher
     if (currentIndex < data.projets.length) {
-        // Sélectionne l'opérateur et le projet actuels
+        //Sélectionner l'opérateur et le projet actuels
         let currentOperateur = data.operators[currentIndex];
         let currentProjet = data.projets[currentIndex];
 
-        console.log("Opérateur: " + currentOperateur);
-        console.log("Projet: " + currentProjet.title);
-
+        console.log('Opérateur: ' + currentOperateur);
+        console.log('Projet: ' + currentProjet.title);
     } else {
-
-        console.log("Tous les projets ont été traités.");
-        if (compteur <= 0) {
-
-            didyouwin = true;
-            console.log("gagné");
-        } else if (compteur > 0) {
-
-            console.log("perdu");
-            didyouwin = false;
-        }
+        // Si tous les projets ont été traités
+        console.log('Tous les projets ont été traités.');
     }
 }
 
 function verifierReponse(index) {
     let currentProjet = data.projets[currentIndex];
-    if (index == currentProjet.goodProposal) {
 
-        console.log("Bonne réponse !");
-        compteur -= 1;
-        console.log("compteur " + compteur);
-
+    if (index === currentProjet.goodProposal) {
+        console.log('Bonne réponse !');
+        console.log('Information : ' + currentProjet.information);
     } else {
-
-        console.log("Mauvaise réponse, essayez encore !");
-        compteur += 1;
-        console.log("compteur " + compteur);
+        console.log('Mauvaise réponse, essayez encore !');
     }
 
-
-    nextproposal();
-}
-
-function nextproposal() {
-    currentIndex += 1;
-    afficherProjetEtOperateur.call(this);
+    // Passer au projet suivant
+    currentIndex++;
+    afficherProjetEtOperateur();
 }
 
 function killgame() {
