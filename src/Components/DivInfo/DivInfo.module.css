@@ -1,0 +1,4 @@
+.divinfocontainer {
+    display: flex;
+    flex-direction: column;
+}

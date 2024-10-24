@@ -6,10 +6,4 @@
     justify-content: center;
     position: fixed;
     top: 30%;
-
-    .information {
-        border: 3px solid green;
-        width: 40%;
-        align-items: center;
-    }
 }
