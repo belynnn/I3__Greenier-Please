@@ -25,7 +25,7 @@ let didyouwin;
 let winscreen, lostscreen;
 let index; 
  
-const game = new Phaser.Game(config);
+let game = new Phaser.Game(config);
  
 function preload() {
     this.load.image('background', './assets/BG.png');
@@ -146,4 +146,10 @@ function verifierReponse(index) {
 function nextproposal() {
     currentIndex += 1;
     afficherProjetEtOperateur.call(this);
+}
+
+function killgame()
+{
+    game.destroy();
+    game = null;
 }
