@@ -1,6 +1,11 @@
 import styles from "./About.module.css";
+import { useEffect } from 'react';
 
 const About = () => {
+
+    useEffect(() => {
+        killgame();
+    }, []);
 
     return (
         <>
