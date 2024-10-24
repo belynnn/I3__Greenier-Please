@@ -24,6 +24,10 @@ let makeclosup = false;
 let didyouwin;
 let winscreen, lostscreen;
 let index;
+let thermometer;
+let ingamewindow;
+
+let clickCount = localStorage.setItem('clickCount', 0);
 
 let game = new Phaser.Game(config);
 
@@ -35,6 +39,12 @@ function preload() {
     this.load.image('closeup', './assets/PaperCloseUp.png');
     this.load.image('winscreen', './assets/WinScreen.png');
     this.load.image('lostscreen', './assets/GameOverScreen.png');
+    this.load.image('firstthermomether', './assets/NeutralThermometer.png');
+    this.load.image('seccondthermomether', './assets/SecondThermometer.png');
+    this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
+    this.load.image('neutralwindow', './assets/NeutralWindow.png');
+
+    clickCount = 0;
 }
 
 function create() {
@@ -61,7 +71,7 @@ function create() {
 
 
     accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
-    accept.on('pointerdown', () => makeclosup = false);
+    accept.on('pointerdown', () => { makeclosup = false; clickCount++; });
     accept.on('pointerup', () => verifierReponse(index));
 
     paper1 = createPaper(this, 150, 450, 0);
@@ -83,6 +93,22 @@ function update() {
         paper1.setVisible(false);
         paper2.setVisible(false);
         paper3.setVisible(false);
+    }
+
+    thermometer.setVisible(false);
+
+    if (compteur < 0) {
+
+        thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
+
+    } else if (compteur > 0) {
+
+        thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
+
+    } else {
+
+        thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
+
     }
 }
 
@@ -151,4 +177,5 @@ function nextproposal() {
 function killgame() {
     game.destroy();
     game = null;
+    document.querySelector('canvas[width][height]').remove();
 }
