@@ -86,6 +86,19 @@ function create() {
         .setInteractive()
         .setVisible(false);
 
+<<<<<<< Updated upstream
+=======
+  accept = this.add
+    .image(788, 500, 'buttonaccept')
+    .setInteractive()
+    .setOrigin(0, 0);
+  accept.on('pointerdown', () => {
+    makeclosup = false;
+    clickCount++;
+    console.log('clickCount : ', clickCount);
+  });
+  accept.on('pointerup', () => verifierReponse(index));
+>>>>>>> Stashed changes
 
     accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
     accept.on('pointerdown', () => { makeclosup = false; clickCount++; });
