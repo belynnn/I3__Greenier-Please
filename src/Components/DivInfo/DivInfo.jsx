@@ -4,13 +4,22 @@ import styles from './DivInfo.module.css';
 const DivInfo = () => {
   //todo : récupérer les infos du json
   const projects = data.projets;
+  console.log('clickCount ' + parseInt(localStorage.getItem('clickCount')));
 
   //todo : récupérer les infos du bouton dans le local storage
-  // const clickChecked = localStorage.getItem('clickCount');
-  // console.log('clickChecked' + clickChecked);
+  console.log('parseInt: ' + parseInt(localStorage.getItem('clickCount')));
+  console.log(Object.keys(localStorage) + ': ' + Object.values(localStorage));
+  const [count, setCount] = useState(() => {
+    return parseInt(localStorage.getItem('clickCount'));
+  });
+  //! T____________________________________________T
+  window.addEventListener('storage', () => {
+    setCount(Object.values(localStorage));
+    console.log('count setted: ' + count);
+  });
+  //! T____________________________________________T
 
-  // // const [clickCount, setClickCount] = useState(clickChecked);
-
+  //? other :
   // function displayDiv() {
   //   localStorage.getItem('clickCount');
   //   setClickCount(clickCount + 1);
