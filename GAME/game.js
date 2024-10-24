@@ -26,6 +26,7 @@ let winscreen, lostscreen;
 let index; 
 let thermometer;
 let ingamewindow;
+let projectTitleText, operatorText;  
 
 let clickCount = localStorage.setItem('clickCount', 0);
  
@@ -43,6 +44,7 @@ function preload() {
     this.load.image('seccondthermomether', './assets/SecondThermometer.png');
     this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
     this.load.image('neutralwindow', './assets/NeutralWindow.png');
+    this.load.image('elli', './assets/PNG.png');
 
     clickCount = 0;
 }
@@ -57,13 +59,13 @@ function create() {
 
     thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
     ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97);
- 
+    npc = this.add.image(100, 125, 'elli').setOrigin(0, 0).setScale(0.8)
 
     closeup = this.add.image(250, -150, 'closeup').setOrigin(0, 0).setVisible(false);
     closeupText = this.add.text(300, 200, '', { 
         fontSize: '18px', 
         fill: '#2E8B57', 
-        fontFamily: 'Arial', 
+        fontFamily: 'courier new', 
         fontStyle: 'bold', 
         wordWrap: { width: closeup.width - 50 }
     }).setOrigin(0, 0).setVisible(false);
@@ -81,11 +83,9 @@ function create() {
     paper2 = createPaper(this, 300, 450, 1);
     paper3 = createPaper(this, 450, 450, 2);
 
-    
+    operatorText = this.add.text(20, 20, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });
+    projectTitleText = this.add.text(20, 50, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' })
 
-    
-
-    
     afficherProjetEtOperateur.call(this);
 }
  
@@ -142,6 +142,9 @@ function afficherProjetEtOperateur() {
  
         console.log("Opérateur: " + currentOperateur);
         console.log("Projet: " + currentProjet.title);
+
+        operatorText.setText('Opérateur:\n' + currentOperateur);
+        projectTitleText.setText('Projet:\n' + currentProjet.title);
  
     } else {
 
@@ -180,6 +183,12 @@ function verifierReponse(index) {
 function nextproposal() {
     currentIndex += 1;
     afficherProjetEtOperateur.call(this);
+
+    if(currentIndex == 1)
+        {
+            npc = this.add.image(225, 125, 'elli').setOrigin(0, 0).setScale(0.8)
+        }
+    
 }
 
 function killgame()
