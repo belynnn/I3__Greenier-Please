@@ -24,6 +24,10 @@ let makeclosup = false;
 let didyouwin;
 let winscreen, lostscreen;
 let index; 
+let thermometer;
+let ingamewindow;
+
+let clickCount = localStorage.setItem('clickCount', 0);
  
 let game = new Phaser.Game(config);
  
@@ -35,6 +39,12 @@ function preload() {
     this.load.image('closeup', './assets/PaperCloseUp.png');
     this.load.image('winscreen', './assets/WinScreen.png');
     this.load.image('lostscreen', './assets/GameOverScreen.png');
+    this.load.image('firstthermomether', './assets/NeutralThermometer.png');
+    this.load.image('seccondthermomether', './assets/SecondThermometer.png');
+    this.load.image('thirdthermomether', './assets/ThirdThermometer.png');
+    this.load.image('neutralwindow', './assets/NeutralWindow.png');
+
+    clickCount = 0;
 }
  
 function create() {
@@ -44,6 +54,9 @@ function create() {
 
     let background = this.add.image(0, 0, 'background');
     background.setOrigin(0, 0);
+
+    thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
+    ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97);
  
 
     closeup = this.add.image(250, -150, 'closeup').setOrigin(0, 0).setVisible(false);
@@ -61,13 +74,18 @@ function create() {
  
 
     accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
-    accept.on('pointerdown', () => makeclosup = false);
+    accept.on('pointerdown', () => {makeclosup = false;clickCount++;});
     accept.on('pointerup', () => verifierReponse(index));
  
     paper1 = createPaper(this, 150, 450, 0);
     paper2 = createPaper(this, 300, 450, 1);
     paper3 = createPaper(this, 450, 450, 2);
- 
+
+    
+
+    
+
+    
     afficherProjetEtOperateur.call(this);
 }
  
@@ -83,6 +101,22 @@ function update() {
         paper1.setVisible(false);
         paper2.setVisible(false);
         paper3.setVisible(false);
+    }
+
+    thermometer.setVisible(false)
+
+    if (compteur < 0) {
+
+        thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
+        
+    } else if (compteur > 0) {
+
+        thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
+        
+    } else {
+
+        thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
+
     }
 }
  
@@ -152,4 +186,5 @@ function killgame()
 {
     game.destroy();
     game = null;
+    document.querySelector('canvas[width][height]').remove();
 }
