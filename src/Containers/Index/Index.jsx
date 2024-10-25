@@ -1,7 +1,11 @@
 import { Link } from 'react-router-dom';
 import styles from './Index.module.css';
+import { useEffect } from 'react';
 
 const Index = () => {
+  useEffect(() => {
+    killgame();
+  }, []);
   return (
     <>
       <section className={styles.firstsection}>

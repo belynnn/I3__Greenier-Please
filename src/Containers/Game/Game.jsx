@@ -7,21 +7,15 @@ const Game = () => {
 
   useEffect(() => {
     startgame();
-    // const script = document.createElement("script");
-    // script.src = "/GAME/game.js";
-    // script.async = true;
-    // document.body.appendChild(script);
-
-    // return () => {
-    //   document.body.removeChild(script);
-    // };
+    const GAME_CANVA = document.querySelector("canvas");
+    document.getElementById('toto').appendChild(GAME_CANVA);
+    // GAME_CANVA.classList.add("canva");
   }, []);
-
 
 
   return (
     <>
-      <div className={styles.divgame}></div>
+      <div id="toto" className={styles.divgame}></div>
       <section className={styles.infosection}>
         <div className={styles.information}>
           <p>Infos des projets</p>
