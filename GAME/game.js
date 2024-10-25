@@ -100,7 +100,7 @@ function create() {
     winscreen = this.add.image(100, 100, 'winscreen').setOrigin(0, 0).setInteractive().setVisible(false);
     lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setInteractive().setVisible(false);
 
-    accept = this.add.image(788, 500, 'buttonaccept').setInteractive().setOrigin(0, 0);
+    accept = this.add.image(788, 500, 'buttonaccept').setOrigin(0, 0);
     accept.on('pointerdown', () => {makeclosup = false;clickCount++;});
     accept.on('pointerup', () => verifierReponse(index));
  
@@ -179,7 +179,7 @@ function update() {
 function createPaper(scene, x, y, propalIndex) {
     let paper = scene.add.image(x, y, 'paper').setInteractive().setOrigin(0, 0).setVisible(true);
     paper.on('pointerdown', () => selectProposal(propalIndex));
-    paper.on('pointerup', () => makeclosup = true);
+    paper.on('pointerup', () => {makeclosup = true; accept.setInteractive;});
     return paper;
 }
  
@@ -257,13 +257,13 @@ function countingDown() {
     }
 }
 
-//function killgame()
+function killgame()
 {
-    //if (game)
+    if (game)
         {
-            //game.destroy();
-            //game = null;
-            //document.querySelector('canvas[width][height]').remove();
+            game.destroy();
+            game = null;
+            document.querySelector('canvas[width][height]').remove();
         }
    
 }
