@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 const Index = () => {
   useEffect(() => {
+    // const GAME_CANVA = document.querySelector('canvas');
     killgame();
   }, []);
   return (
