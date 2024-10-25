@@ -27,7 +27,7 @@ let index;
 let thermometer;
 let ingamewindow;
 let projectTitleText, operatorText;  
-let countDownText, STARTCOUNTDOWN = 20, countDown, countDownTimer;
+let countDownText, STARTCOUNTDOWN = 45, countDown, countDownTimer;
 let npc;
 
 let clickCount = localStorage.setItem('clickCount', 0);
@@ -58,6 +58,7 @@ function preload() {
     this.load.image('thomas', './assets/NPC2.png');
     this.load.image('jelly', './assets/jelly.png');
     this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
+    this.load.image('badwindow', './retouche_assets/dystopic_world.png');
 
     clickCount = 0;
 }
@@ -70,7 +71,7 @@ function create() {
     background.setOrigin(0, 0);
 
     thermometer = this.add.image(925, 25, 'seccondthermomether').setOrigin(0, 0);
-    ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97);
+    ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97).setVisible(true);
     
     if(currentIndex == 0)
         {
@@ -87,7 +88,7 @@ function create() {
         }
     if(currentIndex == 3)
         {
-            npc = this.add.image(35, 125, 'nicole').setOrigin(0, 0)//.setScale(0.8)
+            npc = this.add.image(15, 125, 'nicole').setOrigin(0, 0)//.setScale(0.8)
         }
     
     
@@ -113,11 +114,11 @@ function create() {
     paper2 = createPaper(this, 300, 450, 1);
     paper3 = createPaper(this, 450, 450, 2);
 
-    operatorText = this.add.text(20, 20, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });
-    projectTitleText = this.add.text(20, 50, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' })
+    operatorText = this.add.text(20, 20, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });//.setScale(1.2);
+    projectTitleText = this.add.text(20, 50, '', { fontSize: '14px', fill: '#000000', fontFamily: 'Courier New', fontStyle: 'bold' });//.setScale(1.2);
 
     countDown = STARTCOUNTDOWN; 
-    countDownText = this.add.text(20, 80, countDown + " sec", { fontFamily: 'Courier New', fontSize: '20px', fontStyle: 'bold', fill: '#ff0000' });
+    countDownText = this.add.text(20, 100, countDown + " sec", { fontFamily: 'Courier New', fontSize: '20px', fontStyle: 'bold', fill: '#ff0000' });
     
     countDownTimer = this.time.addEvent({
         delay: 1000,
@@ -147,7 +148,7 @@ function update() {
         }
     if(currentIndex == 3)
         {
-            npc = this.add.image(50, 125, 'nicole').setOrigin(0, 0).setScale(2)
+            npc = this.add.image(15, 125, 'nicole').setOrigin(0, 0).setScale(2)
         }
     
 
@@ -165,7 +166,7 @@ function update() {
         countDownTimer.paused = true;
     }
 
-    thermometer.setVisible(false)
+    thermometer.setVisible(false);
 
     if (compteur < 0) {
 
@@ -174,6 +175,14 @@ function update() {
     } else if (compteur > 0) {
 
         thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
+        if (compteur > 1)
+            {
+                ingamewindow = this.add.image(642, 20, 'badwindow').setOrigin(0, 0).setVisible(true);
+            }
+        else
+        {
+            ingamewindow = this.add.image(642, 20, 'neutralwindow').setOrigin(0, 0).setScale(0.97).setVisible(true);
+        }
         
     } else {
 
@@ -251,8 +260,6 @@ function verifierReponse(index) {
 function nextproposal() {
     currentIndex += 1;
     afficherProjetEtOperateur.call(this);
-
-    
     
 }
 
