@@ -48,7 +48,10 @@ let countDownText,
   countDownTimer;
 let npc;
 
-let clickCount = localStorage.setItem('clickCount', 0);
+let clickCount = (x) => {
+  localStorage.setItem('clickCount', x);
+  console.log('x de fct clickCount =', x);
+};
 
 let game;
 
@@ -78,16 +81,13 @@ function preload() {
   this.load.image('jelly', './assets/jelly.png');
   this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
 
-  clickCount = 0;
-  clickCount = 0;
+  clickCount(0);
 }
 
 function create() {
   data = this.cache.json.get('gameData');
   data = this.cache.json.get('gameData');
 
-  let background = this.add.image(0, 0, 'background');
-  background.setOrigin(0, 0);
   let background = this.add.image(0, 0, 'background');
   background.setOrigin(0, 0);
 
@@ -140,7 +140,7 @@ function create() {
   accept = this.add.image(788, 500, 'buttonaccept').setOrigin(0, 0).setDepth(1);
   accept.on('pointerdown', () => {
     makeclosup = false;
-    clickCount++;
+    clickCount(parseInt(localStorage.getItem('clickCount')) + 1);
   });
   accept.on('pointerup', () => verifierReponse(index));
 
@@ -216,37 +216,46 @@ function update() {
   if (didyouwin !== undefined) {
     winscreen.setVisible(didyouwin);
     lostscreen.setVisible(!didyouwin);
-  if (didyouwin !== undefined) {
-    winscreen.setVisible(didyouwin);
-    lostscreen.setVisible(!didyouwin);
+    if (didyouwin !== undefined) {
+      winscreen.setVisible(didyouwin);
+      lostscreen.setVisible(!didyouwin);
 
-    paper1.setVisible(false);
-    paper2.setVisible(false);
-    paper3.setVisible(false);
+      paper1.setVisible(false);
+      paper2.setVisible(false);
+      paper3.setVisible(false);
 
-    countDownTimer.paused = true;
-  }
+      countDownTimer.paused = true;
+    }
 
-  if (thermometer) thermometer.setVisible(false);
-  if (thermometer) thermometer.setVisible(false);
+    if (thermometer) thermometer.setVisible(false);
+    if (thermometer) thermometer.setVisible(false);
 
-  if (compteur < 0) {
-    thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
-  } else if (compteur > 0) {
-    thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
-  } else {
-    thermometer = this.add
-      .image(925, 25, 'seccondthermomether')
-      .setOrigin(0, 0);
-  }
-  if (compteur < 0) {
-    thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
-  } else if (compteur > 0) {
-    thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
-  } else {
-    thermometer = this.add
-      .image(925, 25, 'seccondthermomether')
-      .setOrigin(0, 0);
+    if (compteur < 0) {
+      thermometer = this.add
+        .image(925, 25, 'firstthermomether')
+        .setOrigin(0, 0);
+    } else if (compteur > 0) {
+      thermometer = this.add
+        .image(925, 25, 'thirdthermomether')
+        .setOrigin(0, 0);
+    } else {
+      thermometer = this.add
+        .image(925, 25, 'seccondthermomether')
+        .setOrigin(0, 0);
+    }
+    if (compteur < 0) {
+      thermometer = this.add
+        .image(925, 25, 'firstthermomether')
+        .setOrigin(0, 0);
+    } else if (compteur > 0) {
+      thermometer = this.add
+        .image(925, 25, 'thirdthermomether')
+        .setOrigin(0, 0);
+    } else {
+      thermometer = this.add
+        .image(925, 25, 'seccondthermomether')
+        .setOrigin(0, 0);
+    }
   }
 }
 
@@ -269,8 +278,6 @@ function selectProposal(propalIndex) {
   const proposition = data.projets[currentIndex].proposal[propalIndex];
   closeupText.setText(proposition);
   index = propalIndex;
-  const proposition = data.projets[currentIndex].proposal[propalIndex];
-  closeupText.setText(proposition);
 }
 
 function afficherProjetEtOperateur() {
@@ -279,38 +286,37 @@ function afficherProjetEtOperateur() {
     //Sélectionner l'opérateur et le projet actuels
     let currentOperateur = data.operators[currentIndex];
     let currentProjet = data.projets[currentIndex];
-  // Vérifie si nous avons encore des projets à afficher
-  if (currentIndex < data.projets.length) {
-    //Sélectionner l'opérateur et le projet actuels
-    let currentOperateur = data.operators[currentIndex];
-    let currentProjet = data.projets[currentIndex];
+    // Vérifie si nous avons encore des projets à afficher
+    if (currentIndex < data.projets.length) {
+      //Sélectionner l'opérateur et le projet actuels
+      let currentOperateur = data.operators[currentIndex];
+      let currentProjet = data.projets[currentIndex];
 
-    console.log('Opérateur: ' + currentOperateur);
-    console.log('Projet: ' + currentProjet.title);
-    console.log('Opérateur: ' + currentOperateur);
-    console.log('Projet: ' + currentProjet.title);
+      console.log('Opérateur: ' + currentOperateur);
+      console.log('Projet: ' + currentProjet.title);
+      console.log('Opérateur: ' + currentOperateur);
+      console.log('Projet: ' + currentProjet.title);
 
-    operatorText.setText('Opérateur:\n' + currentOperateur);
-    projectTitleText.setText('Projet:\n' + currentProjet.title);
+      operatorText.setText('Opérateur:\n' + currentOperateur);
+      projectTitleText.setText('Projet:\n' + currentProjet.title);
 
-    countDown = STARTCOUNTDOWN;
-    countDownText.setText(countDown + ' sec');
-  } else {
-    console.log('Tous les projets ont été traités.');
-    if (compteur <= 0) {
-      didyouwin = true;
-      console.log('gagné');
-    } else if (compteur > 0) {
-      console.log('perdu');
-      didyouwin = false;
+      countDown = STARTCOUNTDOWN;
+      countDownText.setText(countDown + ' sec');
+    } else {
+      console.log('Tous les projets ont été traités.');
+      if (compteur <= 0) {
+        didyouwin = true;
+        console.log('gagné');
+      } else if (compteur > 0) {
+        console.log('perdu');
+        didyouwin = false;
+      }
+
+      countDownTimer.paused = true;
     }
-
-    countDownTimer.paused = true;
   }
 }
-
 function verifierReponse(index) {
-  let currentProjet = data.projets[currentIndex];
   let currentProjet = data.projets[currentIndex];
 
   if (index === currentProjet.goodProposal) {

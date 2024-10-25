@@ -11,12 +11,12 @@ const DivInfo = () => {
   const [count, setCount] = useState(() => {
     return parseInt(localStorage.getItem('clickCount'));
   });
-  // setInterval(() => {
-  //   // setCount((count = parseInt(localStorage.getItem('clickCount'))));
-  //   console.log('interval parseInt: ' + localStorage.getItem('clickCount'));
+  setInterval(() => {
+    setCount((count = parseInt(localStorage.getItem('clickCount'))));
+    console.log('interval parseInt: ' + localStorage.getItem('clickCount'));
 
-  //   console.log('count: ' + count);
-  // }, 1000);
+    console.log('count: ' + count);
+  }, 1000);
   //! T____________________________________________T
   // window.addEventListener('storage', () => {
   //   setCount(Object.values(localStorage));
