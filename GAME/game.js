@@ -50,15 +50,13 @@ let countDownText,
   countDownTimer;
 let npc;
 
-let clickCount = (x) => {
-  localStorage.setItem('clickCount', x);
-  console.log('x de fct clickCount =', x);
-};
+let clickCountStorage = (x) => {
+  localStorage.setItem('clickCountStorage', x);
+  console.log('x de fct clickCountStorage =', x);
+}; //! web
+
 
 function startgame() {
-  if (!game) {
-    game = new Phaser.Game(config);
-  }
   if (!game) {
     game = new Phaser.Game(config);
   }
@@ -81,7 +79,7 @@ function preload() {
   this.load.image('jelly', './assets/jelly.png');
   this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
 
-  clickCount(0);
+  clickCountStorage(0); //! web
 }
 
 function create() {
@@ -147,22 +145,7 @@ function create() {
   paper1 = createPaper(this, 150, 450, 0);
   paper2 = createPaper(this, 300, 450, 1);
   paper3 = createPaper(this, 450, 450, 2);
-  paper1 = createPaper(this, 150, 450, 0);
-  paper2 = createPaper(this, 300, 450, 1);
-  paper3 = createPaper(this, 450, 450, 2);
 
-  operatorText = this.add.text(20, 20, '', {
-    fontSize: '14px',
-    fill: '#000000',
-    fontFamily: 'Courier New',
-    fontStyle: 'bold',
-  });
-  projectTitleText = this.add.text(20, 50, '', {
-    fontSize: '14px',
-    fill: '#000000',
-    fontFamily: 'Courier New',
-    fontStyle: 'bold',
-  });
   operatorText = this.add.text(20, 20, '', {
     fontSize: '14px',
     fill: '#000000',
@@ -339,6 +322,8 @@ function verifierReponse(index) {
 function nextproposal() {
   currentIndex += 1;
   afficherProjetEtOperateur.call(this);
+  clickCountStorage(parseInt(localStorage.getItem('clickCountStorage')) + 1); //! web
+
 }
 
 function countingDown() {
@@ -353,6 +338,7 @@ function killgame() {
   if (game) {
     game.destroy();
     game = null;
-    //document.querySelector('canvas[width][height]').remove();
+
   }
+
 }
