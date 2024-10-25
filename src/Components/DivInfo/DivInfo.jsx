@@ -40,19 +40,22 @@ const DivInfo = () => {
   console.log(projects);
   return (
     <>
-      {projects.map((projet, index) => {
-        return (
-          <div key={'projet' + index} className={styles.infodiv}>
-            <h3 className={styles.infotitle}>
-              Read more about "{projet.title}"
-            </h3>
-            <p>{projet.information}</p>
-            <a href={projet.link}>
-              Source: Institute for Sustainable IT UE 2021
-            </a>
-          </div>
-        );
-      })}
+      {/* <h2 className={styles.subjectname}>Information</h2> */}
+      <div className={styles.divcontainer}>
+        {projects.map((projet, index) => {
+          return (
+            <section className={styles.sectioninfo}>
+              <div key={'projet' + index} className={styles.infodiv}>
+                <h3 className={styles.infotitle}>
+                  Read more about "{projet.title}"
+                </h3>
+                <p>{projet.information}</p>
+                <a href={projet.link}>See source</a>
+              </div>
+            </section>
+          );
+        })}
+      </div>
     </>
   );
 };

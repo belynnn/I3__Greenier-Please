@@ -39,3 +39,9 @@
   font-family: var(--text-font);
 
 }
+.subjectname {
+  width: 10%;
+  left: 0%;
+  font-size: 40px;
+  line-height: 60px;
+}

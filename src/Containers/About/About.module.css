@@ -1,3 +1,6 @@
+.divcontainer {
+    padding: 5rem;
+}
 .subtitle {
     font-size: 35px;
     padding-bottom: 1rem;
@@ -23,6 +26,7 @@
         padding: 10px;
         width: 20%;
         background-color: var(--text-color);
+        border-radius: 5px;
 
         h3,
         p {
