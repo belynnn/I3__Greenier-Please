@@ -10,7 +10,6 @@ const About = () => {
 
     return (
         <>
-            <h2 className={styles.subtitle}>About</h2>
             <h2 className={styles.subjectname}>Team</h2>
 
             <section className={styles.firstsection}>
@@ -83,13 +82,13 @@ const About = () => {
                     </a>
                 </div>
                 <div className={styles.membercards}>
-                    <h3>Inès</h3>
+                    <h3>Ines</h3>
                     <p>ASR</p>
                     <a className={styles.socialnetwork} href="" target="blank">
                         <img src="/src/assets/Icons/github-logo.svg" alt="Github Profile" />
                     </a>
 
-                    <a className={styles.socialnetwork} href="" target="blank">
+                    <a className={styles.socialnetwork} href="https://www.linkedin.com/in/inestroye" target="blank">
                         <img src="/src/assets/Icons/linkedin-logo.svg" alt="LinkedIn Profile" />
                     </a>
                 </div>
@@ -101,6 +100,17 @@ const About = () => {
                     </a>
 
                     <a className={styles.socialnetwork} href="https://www.linkedin.com/in/sounia-mhalla-dit-aounallah-64578614b/" target="blank">
+                        <img src="/src/assets/Icons/linkedin-logo.svg" alt="LinkedIn Profile" />
+                    </a>
+                </div>
+                <div className={styles.membercards}>
+                    <h3>Anissa</h3>
+                    <p>ASR</p>
+                    <a className={styles.socialnetwork} href="https://github.com/vickyfrosties" target="blank">
+                        <img src="/src/assets/Icons/github-logo.svg" alt="Github Profile" />
+                    </a>
+
+                    <a className={styles.socialnetwork} href="https://www.linkedin.com/in/anissaela" target="blank">
                         <img src="/src/assets/Icons/linkedin-logo.svg" alt="LinkedIn Profile" />
                     </a>
                 </div>
