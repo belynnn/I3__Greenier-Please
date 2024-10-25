@@ -16,8 +16,19 @@ const Navbar = () => {
       {location.pathname !== '/game' && (
         <li hidden={false}>
           <Link to='/game'>
-            <img src='/src/assets/Icons/game-controller.svg' alt='Game page img' />
+            <img
+              src='/src/assets/Icons/game-controller.svg'
+              alt='Game page img'
+            />
             <p>Game</p>
+          </Link>
+        </li>
+      )}
+      {location.pathname !== '/info' && (
+        <li hidden={false}>
+          <Link to='/info'>
+            <img src='/src/assets/Icons/question.svg' alt='Info page img' />
+            <p>Info</p>
           </Link>
         </li>
       )}

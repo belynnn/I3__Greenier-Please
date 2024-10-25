@@ -8,15 +8,15 @@ const DivInfo = () => {
   console.log('clickCount ' + parseInt(localStorage.getItem('clickCount')));
   // console.log(Object.keys(localStorage) + ': ' + Object.values(localStorage));
 
-  const [count, setCount] = useState(() => {
-    return parseInt(localStorage.getItem('clickCount'));
-  });
-  setInterval(() => {
-    setCount((count = parseInt(localStorage.getItem('clickCount'))));
-    console.log('interval parseInt: ' + localStorage.getItem('clickCount'));
-
-    console.log('count: ' + count);
-  }, 1000);
+  const [count, setCount] = useState(null);
+  // setInterval(() => {
+  //   console.log(
+  //     'storage.getItem in jsx: ' + localStorage.getItem('clickCount')
+  //   );
+  //   console.log('count avant: ' + count);
+  //   setCount((count = parseInt(localStorage.getItem('clickCount'))));
+  //   console.log('count après: ' + count);
+  // }, 1000);
   //! T____________________________________________T
   // window.addEventListener('storage', () => {
   //   setCount(Object.values(localStorage));
