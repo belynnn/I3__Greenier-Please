@@ -14,6 +14,21 @@ const config = {
     create: create,
     update: update,
   },
+  type: Phaser.AUTO,
+  width: 1000,
+  height: 650,
+  physics: {
+    default: 'arcade',
+    arcade: {
+      gravity: { y: 0 },
+      debug: false,
+    },
+  },
+  scene: {
+    preload: preload,
+    create: create,
+    update: update,
+  },
 };
 
 let currentIndex = 0;
@@ -41,6 +56,9 @@ function startgame() {
   if (!game) {
     game = new Phaser.Game(config);
   }
+  if (!game) {
+    game = new Phaser.Game(config);
+  }
 }
 
 function preload() {
@@ -61,11 +79,15 @@ function preload() {
   this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
 
   clickCount = 0;
+  clickCount = 0;
 }
 
 function create() {
   data = this.cache.json.get('gameData');
+  data = this.cache.json.get('gameData');
 
+  let background = this.add.image(0, 0, 'background');
+  background.setOrigin(0, 0);
   let background = this.add.image(0, 0, 'background');
   background.setOrigin(0, 0);
 
@@ -125,7 +147,22 @@ function create() {
   paper1 = createPaper(this, 150, 450, 0);
   paper2 = createPaper(this, 300, 450, 1);
   paper3 = createPaper(this, 450, 450, 2);
+  paper1 = createPaper(this, 150, 450, 0);
+  paper2 = createPaper(this, 300, 450, 1);
+  paper3 = createPaper(this, 450, 450, 2);
 
+  operatorText = this.add.text(20, 20, '', {
+    fontSize: '14px',
+    fill: '#000000',
+    fontFamily: 'Courier New',
+    fontStyle: 'bold',
+  });
+  projectTitleText = this.add.text(20, 50, '', {
+    fontSize: '14px',
+    fill: '#000000',
+    fontFamily: 'Courier New',
+    fontStyle: 'bold',
+  });
   operatorText = this.add.text(20, 20, '', {
     fontSize: '14px',
     fill: '#000000',
@@ -179,6 +216,9 @@ function update() {
   if (didyouwin !== undefined) {
     winscreen.setVisible(didyouwin);
     lostscreen.setVisible(!didyouwin);
+  if (didyouwin !== undefined) {
+    winscreen.setVisible(didyouwin);
+    lostscreen.setVisible(!didyouwin);
 
     paper1.setVisible(false);
     paper2.setVisible(false);
@@ -188,7 +228,17 @@ function update() {
   }
 
   if (thermometer) thermometer.setVisible(false);
+  if (thermometer) thermometer.setVisible(false);
 
+  if (compteur < 0) {
+    thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
+  } else if (compteur > 0) {
+    thermometer = this.add.image(925, 25, 'thirdthermomether').setOrigin(0, 0);
+  } else {
+    thermometer = this.add
+      .image(925, 25, 'seccondthermomether')
+      .setOrigin(0, 0);
+  }
   if (compteur < 0) {
     thermometer = this.add.image(925, 25, 'firstthermomether').setOrigin(0, 0);
   } else if (compteur > 0) {
@@ -218,6 +268,9 @@ function selectProposal(propalIndex) {
   index = propalIndex;
   const proposition = data.projets[currentIndex].proposal[propalIndex];
   closeupText.setText(proposition);
+  index = propalIndex;
+  const proposition = data.projets[currentIndex].proposal[propalIndex];
+  closeupText.setText(proposition);
 }
 
 function afficherProjetEtOperateur() {
@@ -226,7 +279,14 @@ function afficherProjetEtOperateur() {
     //Sélectionner l'opérateur et le projet actuels
     let currentOperateur = data.operators[currentIndex];
     let currentProjet = data.projets[currentIndex];
+  // Vérifie si nous avons encore des projets à afficher
+  if (currentIndex < data.projets.length) {
+    //Sélectionner l'opérateur et le projet actuels
+    let currentOperateur = data.operators[currentIndex];
+    let currentProjet = data.projets[currentIndex];
 
+    console.log('Opérateur: ' + currentOperateur);
+    console.log('Projet: ' + currentProjet.title);
     console.log('Opérateur: ' + currentOperateur);
     console.log('Projet: ' + currentProjet.title);
 
@@ -251,6 +311,7 @@ function afficherProjetEtOperateur() {
 
 function verifierReponse(index) {
   let currentProjet = data.projets[currentIndex];
+  let currentProjet = data.projets[currentIndex];
 
   if (index === currentProjet.goodProposal) {
     console.log('Bonne réponse !');
@@ -258,7 +319,14 @@ function verifierReponse(index) {
   } else {
     console.log('Mauvaise réponse, essayez encore !');
   }
+  if (index === currentProjet.goodProposal) {
+    console.log('Bonne réponse !');
+    console.log('Information : ' + currentProjet.information);
+  } else {
+    console.log('Mauvaise réponse, essayez encore !');
+  }
 
+  nextproposal();
   nextproposal();
 }
 
@@ -276,6 +344,11 @@ function countingDown() {
 }
 
 function killgame() {
+  if (game) {
+    game.destroy();
+    game = null;
+    document.querySelector('canvas[width][height]').remove();
+  }
   if (game) {
     game.destroy();
     game = null;
