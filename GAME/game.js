@@ -47,7 +47,7 @@ function preload() {
     this.load.image('buttonaccept', './assets/acceptbutton.png');
     this.load.json('gameData', './GAME/propositions.json');
     this.load.image('paper', './assets/Paper.png');
-    this.load.image('closeup', './assets/PaperCloseUp.png');
+    this.load.image('closeup', './retouche_assets/postit.png');
     this.load.image('winscreen', './assets/WinScreen.png');
     this.load.image('lostscreen', './assets/GameOverScreen.png');
     this.load.image('firstthermomether', './assets/NeutralThermometer.png');
@@ -57,6 +57,7 @@ function preload() {
     this.load.image('elli', './assets/PNG.png');
     this.load.image('thomas', './assets/NPC2.png');
     this.load.image('jelly', './assets/jelly.png');
+    this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
 
     clickCount = 0;
 }
@@ -82,11 +83,15 @@ function create() {
         }
     if(currentIndex == 2)
         {
-            npc = this.add.image(50, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+            npc = this.add.image(35, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+        }
+    if(currentIndex == 3)
+        {
+            npc = this.add.image(35, 125, 'nicole').setOrigin(0, 0)//.setScale(0.8)
         }
     
     
-    closeup = this.add.image(250, -150, 'closeup').setOrigin(0, 0).setVisible(false);
+    closeup = this.add.image(270, 130, 'closeup').setOrigin(0, 0).setVisible(false);
     closeupText = this.add.text(300, 200, '', { 
         fontSize: '18px', 
         fill: '#2E8B57', 
@@ -97,10 +102,10 @@ function create() {
  
     
 
-    winscreen = this.add.image(100, 100, 'winscreen').setOrigin(0, 0).setInteractive().setVisible(false);
-    lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setInteractive().setVisible(false);
+    winscreen = this.add.image(100, 100, 'winscreen').setOrigin(0, 0).setVisible(false).setDepth(2);
+    lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setVisible(false).setDepth(2);
 
-    accept = this.add.image(788, 500, 'buttonaccept').setOrigin(0, 0);
+    accept = this.add.image(788, 500, 'buttonaccept').setOrigin(0, 0).setDepth(1);
     accept.on('pointerdown', () => {makeclosup = false;clickCount++;});
     accept.on('pointerup', () => verifierReponse(index));
  
@@ -138,7 +143,11 @@ function update() {
         }
     if(currentIndex == 2)
         {
-            npc = this.add.image(50, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+            npc = this.add.image(35, 125, 'jelly').setOrigin(0, 0)//.setScale(0.8)
+        }
+    if(currentIndex == 3)
+        {
+            npc = this.add.image(50, 125, 'nicole').setOrigin(0, 0).setScale(2)
         }
     
 
@@ -172,14 +181,12 @@ function update() {
 
     }
 
-    
-
 }
  
 function createPaper(scene, x, y, propalIndex) {
     let paper = scene.add.image(x, y, 'paper').setInteractive().setOrigin(0, 0).setVisible(true);
     paper.on('pointerdown', () => selectProposal(propalIndex));
-    paper.on('pointerup', () => {makeclosup = true; accept.setInteractive;});
+    paper.on('pointerup', () => {makeclosup = true; accept.setInteractive();});
     return paper;
 }
  
