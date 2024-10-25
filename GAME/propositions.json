@@ -1,6 +1,9 @@
 {
     "operators": [
-        "Alexandra - game dev",
+        "Elli - Team Panoptes",
+        "Thomas - Team Panoptes",
+        "JellyLord - emotional support heptapod",
+        "Nicole - chief department at Interface3",
         "Anissa - admin sys/network",
         "Audrey - UI/UX designer",
         "Bastien - Team Panoptes",
@@ -11,11 +14,11 @@
         "Joel - trainer at Interface3",
         "Julie - trainer at Interface3",
         "Luna - game dev",
-        "Nicole - chief department at Interface3",
         "Samuel - trainer at Cognitic",
         "Sonia - chief department at Interface3",
-        "Sounia - frontend dev",
-        "Thomas - Team Panoptes"
+        "Sounia - frontend dev"
+
+        
     ],
 
     "projets": [
@@ -53,6 +56,17 @@
             "goodProposal": 1,
             "information": "Is a maximum volume of components transferred to the user device defined?\nAll the components transferred to the user device have an impact on network transfers and on the processing required to handle them on the user terminal. It is important to reduce and control this volume.\nA good solution is to use a Project Framework Sheet.",
             "link": "https://gr491.isit-europe.org/crit.php?id=10-5085-frontend-lensemble-des-elements-transferes-sur-le-poste"
+        },
+        {
+            "title": "temporary title",
+            "proposal": [
+                "Temporary proposal 1",
+                "Temporary proposal 2",
+                "temporary proposal 3"
+            ],
+            "goodProposal": 3,
+            "information": "temporary info",
+            "link": "not a link"
         }
     ]
 }
