@@ -31,6 +31,8 @@ const config = {
   },
 };
 
+let game;
+
 let currentIndex = 0;
 let data;
 let paper1, paper2, paper3, closeup, closeupText, accept;
@@ -52,8 +54,6 @@ let clickCount = (x) => {
   localStorage.setItem('clickCount', x);
   console.log('x de fct clickCount =', x);
 };
-
-let game;
 
 function startgame() {
   if (!game) {
@@ -353,11 +353,6 @@ function killgame() {
   if (game) {
     game.destroy();
     game = null;
-    document.querySelector('canvas[width][height]').remove();
-  }
-  if (game) {
-    game.destroy();
-    game = null;
-    document.querySelector('canvas[width][height]').remove();
+    //document.querySelector('canvas[width][height]').remove();
   }
 }
