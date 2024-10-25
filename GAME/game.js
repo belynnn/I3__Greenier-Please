@@ -29,10 +29,14 @@ let ingamewindow;
 let projectTitleText, operatorText;  
 let countDownText, STARTCOUNTDOWN = 45, countDown, countDownTimer;
 let npc;
-
-let clickCount = localStorage.setItem('clickCount', 0);
  
 let game;
+
+let clickCountStorage = (x) => {
+    localStorage.setItem('clickCountStorage', x);
+    console.log('x de fct clickCountStorage =', x);
+  }; //! web
+   
 
 function startgame()
 {
@@ -60,7 +64,7 @@ function preload() {
     this.load.image('nicole', './retouche_assets/gizmoKaren_jellyfisher.png');
     this.load.image('badwindow', './retouche_assets/dystopic_world.png');
 
-    clickCount = 0;
+    clickCountStorage(0); //! web
 }
  
 function create() {
@@ -107,7 +111,7 @@ function create() {
     lostscreen = this.add.image(100, 100, 'lostscreen').setOrigin(0, 0).setVisible(false).setDepth(2);
 
     accept = this.add.image(788, 500, 'buttonaccept').setOrigin(0, 0).setDepth(1);
-    accept.on('pointerdown', () => {makeclosup = false;clickCount++;});
+    accept.on('pointerdown', () => {makeclosup = false});
     accept.on('pointerup', () => verifierReponse(index));
  
     paper1 = createPaper(this, 150, 450, 0);
@@ -260,6 +264,7 @@ function verifierReponse(index) {
 function nextproposal() {
     currentIndex += 1;
     afficherProjetEtOperateur.call(this);
+    clickCountStorage(parseInt(localStorage.getItem('clickCountStorage')) + 1); //! web
     
 }
 
@@ -277,7 +282,7 @@ function killgame()
         {
             game.destroy();
             game = null;
-            document.querySelector('canvas[width][height]').remove();
+            
         }
    
 }
